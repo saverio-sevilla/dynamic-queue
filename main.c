@@ -12,23 +12,23 @@ typedef struct test_struct {
 	char id;
 } Test_struct;
 
-int test1(void) {
+void test1(void) {
 
 	queue q = queueInit(sizeof(TYPE));
 
-	assert(queueNItems(q) == 0); // Assert that the queue is empty after initialization
+	assert(queueHighPtr(q) == 0); // Assert that the queue is empty after initialization
 	assert(queueCapacity(q) == INIT_SIZE); // Assert that the initial capacity is INIT_SIZE
-	printf("High ptr position in queue: %zu\n", queueNItems(q));
+	printf("High ptr position in queue: %zu\n", queueHighPtr(q));
 	printf("Capacity of queue: %zu \n", queueCapacity(q));
 
 	for (int i = 0; i < 1000; i++) {
 		enqueue(&q, TYPE, (TYPE)i);
 	}
 
-	assert(queueNItems(q) == 1000);
-	assert(queueCapacity(q) >= queueNItems(q));
+	assert(queueHighPtr(q) == 1000);
+	assert(queueCapacity(q) >= queueHighPtr(q));
 
-	printf("High ptr position in queue: %zu\n", queueNItems(q));
+	printf("High ptr position in queue: %zu\n", queueHighPtr(q));
 	printf("Capacity of queue: %zu \n", queueCapacity(q));
 
 	TYPE result;
@@ -46,7 +46,7 @@ int test1(void) {
 	return 0;
 }
 
-int test2(void) {
+void test2(void) {
 	Test_struct s1 = { 1, 3.14, 'c' };
 	Test_struct s2 = { 5, 4.20, 'R' };
 	Test_struct s3 = { -7, 5.5, 'e' };
@@ -99,13 +99,43 @@ void test3(int iterations, int n_elements, int difference) {
 
 	printf("Size of queue: %zu\n", queueSize(q));
 	printf("Capacity of queue: %zu \n", queueCapacity(q));
-
 	queueFree(q);
+}
+
+void test4() {
+	queue q = queueInit(sizeof(int));
+
+	enqueue(&q, int, (int)42);
+	enqueue(&q, int, (int)33);
+	enqueue(&q, int, (int)16);
+	enqueue(&q, int, (int)88);
+
+	int val1 = peek(q, int);
+	int val2 = dequeue(q, int);
+
+	printf("val1: %d, val2: %d\n", val1, val2);
+}
+
+void example() {
+	queue q = queueInit(sizeof(int));
+
+	enqueue(&q, int, (int)42);
+	enqueue(&q, int, (int)33);
+	enqueue(&q, int, (int)16);
+	enqueue(&q, int, (int)88);
+
+	int val1 = peek(q, int);
+	int val2 = dequeue(q, int);
+	int val3 = dequeue(q, int);
+
+	printf("%d, %d, %d, capacity: %zu, size: %zu\n", val1, val2, val3, queueCapacity(q), queueSize(q));
 
 }
 
-int main() {
-	int t1 = test1();
-	int t2 = test2();
-	test3(900, 250, 1);
+void main() {
+	test1();
+	test2();
+	test3(900, 250, 0);
+	test4();
+	example();
 }
