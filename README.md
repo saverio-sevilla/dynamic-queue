@@ -44,8 +44,8 @@ void example() {
 	int val2 = dequeue(q, int);
 	int val3 = dequeue(q, int);
 
-	printf("%d, %d, %d, capacity: %zu, size: %zu\n", val1, val2, val3, queueCapacity(q), queueSize(q));
+	printf("peek: %d, first value: %d, second value: %d, capacity: %zu, size: %zu\n", val1, val2, val3, queueCapacity(q), queueSize(q));
 }
 ```
 
-Output: '42, 42, 33, capacity: 16, size: 2'
+Output: `peek: 42, first value: 42, second value: 33, capacity: 16, size: 2`
