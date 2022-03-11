@@ -49,3 +49,9 @@ void example() {
 ```
 
 Output: `peek: 42, first value: 42, second value: 33, capacity: 16, size: 2`
+
+## Implementation
+
+The queue is based on the queue_data structure which holds references to the capacity of the queue and pointers to the first and last element in the queue. 
+The data is stored in an array of chars which is the actual queue passed to the user, pointer arithmetic is used to access the main struct from the pointer to the char array. 
+
