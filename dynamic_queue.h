@@ -16,6 +16,7 @@ typedef unsigned char type_size; // stores the number of bytes for a type
 
 
 #define DEBUG
+#undef DEBUG
 
 #define queue_add_asg(q_addr, type)                                         \
 	((type*)_queue_add((queue*)q_addr, sizeof(type)))
@@ -36,6 +37,7 @@ queue queueInit(type_size t_size);
 void queueFree(queue q);
 queue_size_t queueNItems(queue q);
 queue_size_t queueCapacity(queue q);
+queue_size_t queueSize(queue q);
 void* _queuePeek(queue q, type_size t_size);
 void* _queuePopReturn(queue q, type_size t_size);
 void* _queueDequeue(queue q, type_size t_size);

@@ -36,6 +36,10 @@ queue_size_t queueCapacity(queue q) {
 	return queueGetData(q)->capacity;
 }
 
+queue_size_t queueSize(queue q) {
+	return queueGetData(q)->n_items - queueGetData(q)->low_ptr;
+}
+
 
 queue_data* queueRealloc(queue_data* q_data, type_size t_size)
 {

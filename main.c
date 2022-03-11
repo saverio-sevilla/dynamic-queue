@@ -18,7 +18,7 @@ int test1(void) {
 
 	assert(queueNItems(q) == 0); // Assert that the queue is empty after initialization
 	assert(queueCapacity(q) == INIT_SIZE); // Assert that the initial capacity is INIT_SIZE
-	printf("Size of queue: %zu\n", queueNItems(q));
+	printf("High ptr position in queue: %zu\n", queueNItems(q));
 	printf("Capacity of queue: %zu \n", queueCapacity(q));
 
 	for (int i = 0; i < 1000; i++) {
@@ -28,7 +28,7 @@ int test1(void) {
 	assert(queueNItems(q) == 1000);
 	assert(queueCapacity(q) >= queueNItems(q));
 
-	printf("Size of queue: %zu\n", queueNItems(q));
+	printf("High ptr position in queue: %zu\n", queueNItems(q));
 	printf("Capacity of queue: %zu \n", queueCapacity(q));
 
 	TYPE result;
@@ -71,9 +71,41 @@ int test2(void) {
 	#endif
 	assert(result.val1 == 5 && result.id == 'R');
 
+	queueFree(q2);
+
+}
+
+
+void test3(int iterations, int n_elements, int difference) {
+	queue q = queueInit(sizeof(TYPE));
+
+	if (difference > n_elements) {
+		fprintf(stderr, "The difference in elements cannot be larger than the number of elements");
+		exit(EXIT_FAILURE);
+	}
+
+	while (iterations) {
+
+		for (int i = 0; i < n_elements; i++) {
+			enqueue(&q, TYPE, (TYPE)i);
+		}
+
+		for (int i = 0; i < n_elements - difference; i++) {
+			TYPE result = dequeue(q, TYPE);
+		}
+
+		iterations--;
+	}
+
+	printf("Size of queue: %zu\n", queueSize(q));
+	printf("Capacity of queue: %zu \n", queueCapacity(q));
+
+	queueFree(q);
+
 }
 
 int main() {
 	int t1 = test1();
 	int t2 = test2();
+	test3(900, 250, 1);
 }
