@@ -1,6 +1,6 @@
 # dynamic-queue
 
-A small implementation of queue in C, works with different types (even structs or struct pointers), will automatically resize itself
+A small implementation of queue in C, works with different types (even structs or struct pointers), will automatically be resized
 at runtime to accomodate any amount of elements. 
 
 ## Usage 
