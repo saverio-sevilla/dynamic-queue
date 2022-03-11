@@ -55,5 +55,5 @@ Output: `peek: 42, first value: 42, second value: 33, capacity: 16, size: 2`
 The queue is based on the queue_data structure which holds references to the capacity of the queue and pointers to the first and last element in the queue. 
 The data is stored in an array of chars which is the actual queue passed to the user, pointer arithmetic is used to access the main struct from the pointer to the buffer, when necessary.
 
-The queue performs a periodic balancing check to avoid bloating the capacity after many queue-dequeue cycle. If the pointer to the first element of the queue is past hald the capacity, all the data is copied to the front of the buffer with memcpy.  
+The queue performs a periodic balancing check to avoid constantly the capacity after many queue-dequeue cycle. If the pointer to the first element of the queue is past half the total capacity, all the data is copied to the front of the buffer with memcpy.  
 
