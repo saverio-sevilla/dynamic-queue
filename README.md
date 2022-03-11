@@ -21,6 +21,31 @@ dequeue(q, type)
 ```
 The user must remember that, to enqueue an element, the address of the queue is passed, while to dequeue, the queue itself is passed as parameter.
 To peek on the first element at the front of the queue use the function 
-``'
+```
 peek(q, type)
 ```
+Lastly to free the queue call the function
+```
+queueFree(queue q)
+```
+
+## Example
+
+```
+void example() {
+	queue q = queueInit(sizeof(int));
+
+	enqueue(&q, int, (int)42);
+	enqueue(&q, int, (int)33);
+	enqueue(&q, int, (int)16);
+	enqueue(&q, int, (int)88);
+
+	int val1 = peek(q, int);
+	int val2 = dequeue(q, int);
+	int val3 = dequeue(q, int);
+
+	printf("%d, %d, %d, capacity: %zu, size: %zu\n", val1, val2, val3, queueCapacity(q), queueSize(q));
+}
+```
+
+Output: '42, 42, 33, capacity: 16, size: 2'
